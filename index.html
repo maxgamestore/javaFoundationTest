@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simulare Java Foundations</title>
+<meta name="description" content="Simulator de examen pentru certificarea Oracle Java Foundations: grile cu răspuns unic, multiplu, adevărat/fals și răspuns scris.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand">java.foundations.sim</div>
+    <button class="btn" id="themeBtn" type="button">Temă</button>
+  </div>
+
+  <!-- ECRAN START -->
+  <section id="start">
+    <h1>Simulare Java Foundations</h1>
+    <p class="lead">Exersează pentru certificarea Oracle Java Foundations cu întrebări de tip grilă: răspuns unic, răspunsuri multiple, adevărat/fals și rezultate de cod scrise de tine.</p>
+
+    <div class="start">
+      <div class="card">
+        <h2>Examen simulat</h2>
+        <ul class="facts">
+          <li><b id="exCount">60</b> întrebări</li>
+          <li><b id="exMin">120</b> minute</li>
+          <li>prag de promovare <b id="exPass">65%</b></li>
+        </ul>
+        <p class="hint">Întrebări amestecate din toate temele, fără feedback până la final.</p>
+        <button class="btn primary" id="examBtn" type="button">Începe examenul</button>
+      </div>
+
+      <div class="card">
+        <h2>Exersare</h2>
+        <div class="field"><span class="lbl">Teme</span>
+          <div class="topics" id="topics"></div>
+          <div class="row small"><button class="link" id="allTopics" type="button">Selectează tot</button><button class="link" id="noTopics" type="button">Deselectează tot</button></div>
+        </div>
+        <div class="field"><span class="lbl">Număr de întrebări</span>
+          <div class="seg" id="countSeg"></div>
+        </div>
+        <p class="hint">Verifici fiecare răspuns pe loc și vezi explicația. Fără timer.</p>
+        <p class="warn hidden" id="startMsg" role="alert"></p>
+        <div class="row">
+          <button class="btn primary" id="practiceBtn" type="button">Începe exersarea</button>
+          <button class="btn" id="mistakesBtn" type="button">Greșelile mele</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h2>Ultimele încercări</h2>
+      <div id="history"></div>
+      <p class="hint">Istoricul și greșelile se păstrează doar în acest browser. În cod se presupune că importurile necesare există.</p>
+    </div>
+  </section>
+
+  <!-- ECRAN TEST -->
+  <section id="exam" class="hidden">
+    <div class="exam">
+      <div>
+        <div class="progress"><i id="bar"></i></div>
+        <div class="meta">
+          <span id="qno"></span>
+          <span class="timer" id="timer"></span>
+        </div>
+        <div class="card" id="qcard" aria-live="polite"></div>
+        <div class="row" style="margin-top:14px">
+          <button class="btn" id="prevBtn" type="button">Înapoi</button>
+          <button class="btn" id="flagBtn" type="button">Marchează</button>
+          <button class="btn primary" id="checkBtn" type="button">Verifică</button>
+          <button class="btn primary" id="nextBtn" type="button">Următoarea</button>
+        </div>
+      </div>
+      <aside class="side">
+        <div class="card">
+          <h2>Întrebări</h2>
+          <div class="grid" id="grid"></div>
+          <p class="legend">Albastru: răspuns dat. Punct galben: marcată.</p>
+          <button class="btn" id="finishBtn" type="button" style="width:100%">Termină testul</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ECRAN REZULTAT -->
+  <section id="result" class="hidden">
+    <div class="card">
+      <div class="score"><b id="pct"></b><span class="badge" id="badge"></span></div>
+      <div class="stats" id="stats"></div>
+      <div class="row">
+        <button class="btn primary" id="againBtn" type="button">Înapoi la meniu</button>
+        <button class="btn" id="retryWrongBtn" type="button">Refă doar greșelile</button>
+      </div>
+    </div>
+
+    <h2 style="margin-top:22px">Rezultat pe teme</h2>
+    <div class="card" id="breakdown"></div>
+
+    <h2 style="margin-top:22px">Revizuire</h2>
+    <div class="row" style="margin-bottom:10px">
+      <div class="seg">
+        <label><input type="radio" name="flt" value="all" checked><span>Toate</span></label>
+        <label><input type="radio" name="flt" value="wrong"><span>Doar greșite</span></label>
+      </div>
+    </div>
+    <div class="rev" id="review"></div>
+  </section>
+</div>
+
+<dialog id="dlg">
+  <p id="dlgText" style="margin-top:0"></p>
+  <div class="row" style="justify-content:flex-end">
+    <button class="btn" id="dlgNo" type="button">Continuă testul</button>
+    <button class="btn primary" id="dlgYes" type="button">Termină</button>
+  </div>
+</dialog>
+
+<script src="data/questions.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
